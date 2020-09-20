@@ -10,9 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
-import django_heroku
-from decouple import config
+import os,json
+# import django_heroku
+# from decouple import config
+
+with open("key.json", 'r') as c:
+    params = json.load(c)['params']
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -145,9 +148,9 @@ LOGIN_URL = 'login'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get("email")
-EMAIL_HOST_PASSWORD = os.environ.get('password')
+EMAIL_HOST_USER = params["email"]
+EMAIL_HOST_PASSWORD = params["password"]
 EMAIL_USE_TLS = True
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
